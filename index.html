@@ -72,136 +72,148 @@
                 <div class="floating-legend">
                     <span class="legend-tag tag-a" id="legend-a">Vector A (5, 0)</span>
                     <span class="legend-tag tag-b" id="legend-b">Vector B (3, 4)</span>
-                </div>
+                </div> <!-- End Results View -->
             </div>
         </div>
 
         <!-- Sidebar -->
         <aside class="sidebar">
-            <div class="scroll-content">
-
-                <!-- Glossary -->
-                <div class="card card-glossary">
-                    <h3 class="card-header">
-                        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M2 3h6a4 4 0 0 1 4 4v14a4 4 0 0 0-4-4H2z" />
-                            <path d="M22 3h-6a4 4 0 0 0-4 4v14a4 4 0 0 1 4-4h6z" />
-                        </svg>
-                        ¿Qué significa cada símbolo?
-                    </h3>
-                    <ul class="glossary-list">
-                        <li class="glossary-item">
-                            <div class="symbol-box bg-indigo-soft">·</div>
-                            <div><span class="bold">Producto Punto:</span> Cómo "cooperan" dos vectores en una misma
-                                dirección.</div>
-                        </li>
-                        <li class="glossary-item">
-                            <div class="symbol-box bg-purple-soft">|A|</div>
-                            <div><span class="bold">Magnitud:</span> La longitud de la flecha (Pitágoras).</div>
-                        </li>
-                        <li class="glossary-item">
-                            <div class="symbol-box bg-slate-soft">θ</div>
-                            <div><span class="bold">Theta:</span> El ángulo entre las dos flechas.</div>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Result -->
-                <div class="result-card">
-                    <div>
-                        <div class="result-label">Resultado Total</div>
-                        <div class="result-value" id="res-total">A · B = 15</div>
-                    </div>
-                    <div style="text-align: right;">
-                        <div class="result-label">Interpretación</div>
-                        <div class="interpretation-text" id="res-interpret">Dirección Similar</div>
-                    </div>
-                </div>
-
-                <!-- Algebraic Method -->
-                <div class="card method-card">
-                    <div class="method-badge" style="background: var(--emerald-100); color: var(--emerald-800);">Método
-                        Coordenadas</div>
-                    <h4 class="card-header" style="border-bottom: none; margin-bottom: 0.5rem;">
-                        <svg class="icon-sm text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <path d="M12 19l7-7 3 3-7 7-3-3z" />
-                            <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z" />
-                            <path d="M2 2l5 5" />
-                            <path d="M9.5 9.5l5 5" />
-                        </svg>
-                        Algebraica
-                    </h4>
-                    <div class="formula" id="formula-algebraic">
-                        <span>(</span><span class="text-blue bold">x₁</span><span>·</span><span
-                            class="text-red bold">x₂</span><span>) + (</span><span
-                            class="text-blue bold">y₁</span><span>·</span><span
-                            class="text-red bold">y₂</span><span>)</span>
-                        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polyline points="9 18 15 12 9 6" />
-                        </svg>
-                        <span id="formula-algebraic-step">(5·3) + (0·4)</span>
-                        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polyline points="9 18 15 12 9 6" />
-                        </svg>
-                        <span class="bold" id="formula-algebraic-res"
-                            style="background: var(--emerald-100); padding: 0 4px; border-radius: 2px;">15</span>
-                    </div>
-                </div>
-
-                <!-- Geometric Method -->
-                <div class="card method-card">
-                    <div class="method-badge" style="background: var(--purple-100); color: var(--purple-800);">Método
-                        Visual</div>
-                    <h4 class="card-header" style="border-bottom: none; margin-bottom: 0.25rem;">
-                        <svg class="icon-sm text-purple-600" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <path d="M21.3 15.3l-5-5L14.7 12l5 5-1.6 1.6-5-5-1.6 1.7 5 5-1.6 1.6-5-5-1.6 1.7 5 5" />
-                            <path d="M3 14.7l1.7-1.7M6.4 11.3l1.7-1.7M9.8 7.9l1.7-1.7M13.2 4.5l1.7-1.7" />
-                        </svg>
-                        Geométrica
-                    </h4>
-                    <p style="font-size: 11px; color: var(--slate-500); margin-bottom: 0.5rem;">Usa longitudes y el
-                        coseno del ángulo.</p>
-
-                    <div class="magnitude-calc">
-                        <div
-                            style="font-size: 10px; font-weight: 800; color: var(--purple-800); text-transform: uppercase;">
-                            Cálculo de Magnitudes:</div>
-                        <div class="calc-row">
-                            <span class="bold text-blue">|A|</span> = √(<span id="mag-a-x">5</span>² + <span
-                                id="mag-a-y">0</span>²) ≈ <span class="bold" id="mag-a-val"
-                                style="background: white; border: 1px solid var(--purple-200); padding: 0 4px; border-radius: 2px;">5.00</span>
-                        </div>
-                        <div class="calc-row">
-                            <span class="bold text-red">|B|</span> = √(<span id="mag-b-x">3</span>² + <span
-                                id="mag-b-y">4</span>²) ≈ <span class="bold" id="mag-b-val"
-                                style="background: white; border: 1px solid var(--purple-200); padding: 0 4px; border-radius: 2px;">5.00</span>
-                        </div>
-                    </div>
-
-                    <div class="geometric-summary">
-                        <div class="summary-col">
-                            <span class="summary-label">|A|</span>
-                            <span class="text-blue bold" id="geo-a">5.0</span>
-                        </div>
-                        <span style="color: var(--slate-300);">×</span>
-                        <div class="summary-col">
-                            <span class="summary-label">|B|</span>
-                            <span class="text-red bold" id="geo-b">5.0</span>
-                        </div>
-                        <span style="color: var(--slate-300);">×</span>
-                        <div class="summary-col">
-                            <span class="summary-label" id="geo-cos-label">cos(53°)</span>
-                            <span class="bold" id="geo-cos-val">0.60</span>
-                        </div>
-                        <span style="color: var(--slate-300);">=</span>
-                        <span class="bold text-purple" id="geo-res"
-                            style="background: var(--purple-100); padding: 2px 4px; border-radius:4px; font-size: 0.875rem;">15.0</span>
-                    </div>
-                </div>
-
+            <div class="sidebar-nav">
+                <button id="btn-explanation" class="nav-btn active">Explicación</button>
+                <button id="btn-results" class="nav-btn">Resultados</button>
             </div>
+
+            <div class="scroll-content">
+                <!-- VIEW 1: EXPLANATION -->
+                <div id="view-explanation" class="sidebar-view">
+                    <!-- Glossary -->
+                    <div class="card card-glossary">
+                        <h3 class="card-header">
+                            <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M2 3h6a4 4 0 0 1 4 4v14a4 4 0 0 0-4-4H2z" />
+                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a4 4 0 0 1 4-4h6z" />
+                            </svg>
+                            Conceptos Básicos
+                        </h3>
+                        <ul class="glossary-list">
+                            <li class="glossary-item">
+                                <div class="symbol-box bg-indigo-soft">·</div>
+                                <div><span class="bold">Producto Punto:</span> Es una medida de cuánto apunta un vector
+                                    en la misma dirección que otro.</div>
+                            </li>
+                            <li class="glossary-item">
+                                <div class="symbol-box bg-purple-soft">|A|</div>
+                                <div><span class="bold">Magnitud:</span> La longitud de la flecha. Se calcula como √(x²
+                                    + y²).</div>
+                            </li>
+                            <li class="glossary-item">
+                                <div class="symbol-box bg-slate-soft">θ</div>
+                                <div><span class="bold">Ángulo (Theta):</span> La separación entre ambos. Si es 0°,
+                                    cooperan al máximo; si es 90°, son independientes.</div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- How to Calculate -->
+                    <div class="card theory-card">
+                        <h3 class="card-header">
+                            <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                            </svg>
+                            ¿Cómo se calcula?
+                        </h3>
+                        <div class="theory-content">
+                            <p style="font-size: 0.875rem; color: var(--slate-600); margin-bottom: 0.75rem;">Existen dos
+                                métodos que dan el mismo resultado:</p>
+                            <div class="method-mini">
+                                <div class="mini-label">1. MÉTODO ALGEBRAICO</div>
+                                <div class="mini-formula">(x₁ · x₂) + (y₁ · y₂)</div>
+                            </div>
+                            <div class="method-mini" style="margin-top: 0.5rem;">
+                                <div class="mini-label">2. MÉTODO GEOMÉTRICO</div>
+                                <div class="mini-formula">|A| · |B| · cos(θ)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- VIEW 2: RESULTS -->
+                <div id="view-results" class="sidebar-view hidden">
+                    <!-- Result -->
+                    <div class="result-card">
+                        <div>
+                            <div class="result-label">Resultado Total</div>
+                            <div class="result-value" id="res-total">A · B = 15</div>
+                        </div>
+                        <div style="text-align: right;">
+                            <div class="result-label">Interpretación</div>
+                            <div class="interpretation-text" id="res-interpret">Dirección Similar</div>
+                        </div>
+                    </div>
+
+                    <!-- Algebraic Method -->
+                    <div class="card method-card">
+                        <div class="method-badge" style="background: var(--emerald-100); color: var(--emerald-800);">
+                            Coordenadas</div>
+                        <h4 class="card-header" style="border-bottom: none; margin-bottom: 0.5rem;">Algebraica</h4>
+                        <div class="formula" id="formula-algebraic">
+                            <span>(</span><span class="text-blue bold">x₁</span><span>·</span><span
+                                class="text-red bold">x₂</span><span>) + (</span><span
+                                class="text-blue bold">y₁</span><span>·</span><span
+                                class="text-red bold">y₂</span><span>)</span>
+                            <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="9 18 15 12 9 6" />
+                            </svg>
+                            <span id="formula-algebraic-step">(5·3) + (0·4)</span>
+                            <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="9 18 15 12 9 6" />
+                            </svg>
+                            <span class="bold" id="formula-algebraic-res"
+                                style="background: var(--emerald-100); padding: 0 4px; border-radius: 2px;">15</span>
+                        </div>
+                    </div>
+
+                    <!-- Geometric Method -->
+                    <div class="card method-card">
+                        <div class="method-badge" style="background: var(--purple-100); color: var(--purple-800);">
+                            Visual</div>
+                        <h4 class="card-header" style="border-bottom: none; margin-bottom: 0.25rem;">Geométrica</h4>
+                        <div class="magnitude-calc">
+                            <div class="calc-row">
+                                <span class="bold text-blue">|A|</span> ≈ <span class="bold" id="mag-a-val"
+                                    style="background: white; border: 1px solid var(--purple-200); padding: 0 4px; border-radius: 2px;">5.00</span>
+                                <span style="margin-left: 1rem;" class="bold text-red">|B|</span> ≈ <span class="bold"
+                                    id="mag-b-val"
+                                    style="background: white; border: 1px solid var(--purple-200); padding: 0 4px; border-radius: 2px;">5.00</span>
+                            </div>
+                        </div>
+                        <div class="geometric-summary">
+                            <div class="summary-col">
+                                <span class="summary-label">|A|</span>
+                                <span class="text-blue bold" id="geo-a">5.0</span>
+                            </div>
+                            <span style="color: var(--slate-300);">×</span>
+                            <div class="summary-col">
+                                <span class="summary-label">|B|</span>
+                                <span class="text-red bold" id="geo-b">5.0</span>
+                            </div>
+                            <span style="color: var(--slate-300);">×</span>
+                            <div class="summary-col">
+                                <span class="summary-label" id="geo-cos-label">cos(53°)</span>
+                                <span class="bold" id="geo-cos-val">0.60</span>
+                            </div>
+                            <span style="color: var(--slate-300);">=</span>
+                            <span class="bold text-purple" id="geo-res"
+                                style="background: var(--purple-100); padding: 2px 4px; border-radius:4px; font-size: 0.875rem;">15.0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar Footer -->
+            <footer class="sidebar-footer">
+                Desarrollado con <span class="heart">❤️</span> by Eddyfals0
+            </footer>
         </aside>
     </div>
 

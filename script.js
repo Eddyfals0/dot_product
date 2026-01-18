@@ -39,7 +39,12 @@ const elements = {
     geoB: document.getElementById('geo-b'),
     geoCosLabel: document.getElementById('geo-cos-label'),
     geoCosVal: document.getElementById('geo-cos-val'),
-    geoRes: document.getElementById('geo-res')
+    geoRes: document.getElementById('geo-res'),
+    // Nav Elements
+    btnExplanation: document.getElementById('btn-explanation'),
+    btnResults: document.getElementById('btn-results'),
+    viewExplanation: document.getElementById('view-explanation'),
+    viewResults: document.getElementById('view-results')
 };
 
 // Helpers
@@ -52,11 +57,11 @@ const toSVG = (v) => ({
 function update() {
     const vecA = state.vecA;
     const vecB = state.vecB;
-    
+
     const dotProduct = vecA.x * vecB.x + vecA.y * vecB.y;
     const magA = magnitude(vecA);
     const magB = magnitude(vecB);
-    
+
     let angleRad = 0;
     if (magA > 0 && magB > 0) {
         const cosTheta = Math.max(-1, Math.min(1, dotProduct / (magA * magB)));
@@ -81,12 +86,12 @@ function update() {
     elements.lineA.setAttribute('y2', posA.y);
     elements.lineB.setAttribute('x2', posB.x);
     elements.lineB.setAttribute('y2', posB.y);
-    
+
     handles.A.setAttribute('cx', posA.x);
     handles.A.setAttribute('cy', posA.y);
     handles.B.setAttribute('cx', posB.x);
     handles.B.setAttribute('cy', posB.y);
-    
+
     elements.ringA.setAttribute('cx', posA.x);
     elements.ringA.setAttribute('cy', posA.y);
     elements.ringB.setAttribute('cx', posB.x);
@@ -106,7 +111,7 @@ function update() {
     elements.labelA.setAttribute('y', posA.y - 10);
     elements.labelB.setAttribute('x', posB.x + 10);
     elements.labelB.setAttribute('y', posB.y - 10);
-    
+
     elements.angleLabel.textContent = `${angleDeg.toFixed(0)}°`;
     elements.angleLabel.setAttribute('x', origin.x + 10);
     elements.angleLabel.setAttribute('y', origin.y - 10);
@@ -114,7 +119,7 @@ function update() {
     // Update UI Sidebar
     elements.legendA.textContent = `Vector A (${vecA.x}, ${vecA.y})`;
     elements.legendB.textContent = `Vector B (${vecB.x}, ${vecB.y})`;
-    
+
     elements.resTotal.textContent = `A · B = ${dotProduct}`;
     elements.resInterpret.textContent = dotProduct === 0 ? "Perpendiculares (90°)" : dotProduct > 0 ? "Dirección Similar" : "Dirección Opuesta";
 
@@ -124,7 +129,7 @@ function update() {
     elements.magAX.textContent = vecA.x;
     elements.magAY.textContent = vecA.y;
     elements.magAVal.textContent = magA.toFixed(2);
-    
+
     elements.magBX.textContent = vecB.x;
     elements.magBY.textContent = vecB.y;
     elements.magBVal.textContent = magB.toFixed(2);
@@ -193,6 +198,24 @@ window.addEventListener('mousemove', handleMove);
 window.addEventListener('touchmove', handleMove);
 window.addEventListener('mouseup', handleEnd);
 window.addEventListener('touchend', handleEnd);
+
+// Navigation logic
+function switchView(view) {
+    if (view === 'explanation') {
+        elements.viewExplanation.classList.remove('hidden');
+        elements.viewResults.classList.add('hidden');
+        elements.btnExplanation.classList.add('active');
+        elements.btnResults.classList.remove('active');
+    } else {
+        elements.viewExplanation.classList.add('hidden');
+        elements.viewResults.classList.remove('hidden');
+        elements.btnExplanation.classList.remove('active');
+        elements.btnResults.classList.add('active');
+    }
+}
+
+elements.btnExplanation.addEventListener('click', () => switchView('explanation'));
+elements.btnResults.addEventListener('click', () => switchView('results'));
 
 // Initial update
 update();
