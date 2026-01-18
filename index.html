@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Producto Punto - Visualizador Interactivo</title>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@500&display=swap"
+        rel="stylesheet">
+    <!-- Main Style -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="main-container">
+        <!-- Visualizer -->
+        <div class="visualizer-section" id="visualizer">
+            <div class="canvas-container">
+                <svg id="svg-canvas" viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet">
+                    <defs>
+                        <pattern id="grid" width="25" height="25" patternUnits="userSpaceOnUse">
+                            <path d="M 25 0 L 0 0 0 25" fill="none" stroke="#f1f5f9" stroke-width="1" />
+                        </pattern>
+                        <marker id="arrowA" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"
+                            markerUnits="strokeWidth">
+                            <path d="M0,0 L0,6 L9,3 z" fill="#3b82f6" />
+                        </marker>
+                        <marker id="arrowB" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"
+                            markerUnits="strokeWidth">
+                            <path d="M0,0 L0,6 L9,3 z" fill="#ef4444" />
+                        </marker>
+                    </defs>
+
+                    <rect width="100%" height="100%" fill="url(#grid)" />
+                    <!-- Axes -->
+                    <line x1="0" y1="250" x2="600" y2="250" stroke="#cbd5e1" stroke-width="2" />
+                    <line x1="300" y1="0" x2="300" y2="500" stroke="#cbd5e1" stroke-width="2" />
+
+                    <!-- Proyección -->
+                    <line id="projection-line" x1="0" y1="0" x2="0" y2="0" stroke="#94a3b8" stroke-width="2"
+                        stroke-dasharray="5,5" />
+                    <line id="projection-bar" x1="0" y1="0" x2="0" y2="0" stroke="#fbbf24" stroke-width="6"
+                        opacity="0.4" />
+
+                    <!-- Vectores -->
+                    <line id="vec-a-line" x1="300" y1="250" x2="425" y2="250" stroke="#3b82f6" stroke-width="3"
+                        marker-end="url(#arrowA)" />
+                    <line id="vec-b-line" x1="300" y1="250" x2="375" y2="150" stroke="#ef4444" stroke-width="3"
+                        marker-end="url(#arrowB)" />
+
+                    <!-- Handles -->
+                    <circle id="handle-a-ring" cx="425" cy="250" r="12" fill="#3b82f6" fill-opacity="0.2"
+                        class="handle-ring" />
+                    <circle id="handle-a" cx="425" cy="250" r="6" fill="#3b82f6" class="handle" />
+
+                    <circle id="handle-b-ring" cx="375" cy="150" r="12" fill="#ef4444" fill-opacity="0.2"
+                        class="handle-ring" />
+                    <circle id="handle-b" cx="375" cy="150" r="6" fill="#ef4444" class="handle" />
+
+                    <!-- Labels -->
+                    <text id="label-a" x="435" y="240" class="bold" fill="#2563eb" font-size="14">A</text>
+                    <text id="label-b" x="385" y="140" class="bold" fill="#dc2626" font-size="14">B</text>
+                    <text id="angle-label" x="310" y="240" fill="#94a3b8" font-size="12"
+                        font-family="monospace">0°</text>
+                </svg>
+
+                <div class="floating-legend">
+                    <span class="legend-tag tag-a" id="legend-a">Vector A (5, 0)</span>
+                    <span class="legend-tag tag-b" id="legend-b">Vector B (3, 4)</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="scroll-content">
+
+                <!-- Glossary -->
+                <div class="card card-glossary">
+                    <h3 class="card-header">
+                        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M2 3h6a4 4 0 0 1 4 4v14a4 4 0 0 0-4-4H2z" />
+                            <path d="M22 3h-6a4 4 0 0 0-4 4v14a4 4 0 0 1 4-4h6z" />
+                        </svg>
+                        ¿Qué significa cada símbolo?
+                    </h3>
+                    <ul class="glossary-list">
+                        <li class="glossary-item">
+                            <div class="symbol-box bg-indigo-soft">·</div>
+                            <div><span class="bold">Producto Punto:</span> Cómo "cooperan" dos vectores en una misma
+                                dirección.</div>
+                        </li>
+                        <li class="glossary-item">
+                            <div class="symbol-box bg-purple-soft">|A|</div>
+                            <div><span class="bold">Magnitud:</span> La longitud de la flecha (Pitágoras).</div>
+                        </li>
+                        <li class="glossary-item">
+                            <div class="symbol-box bg-slate-soft">θ</div>
+                            <div><span class="bold">Theta:</span> El ángulo entre las dos flechas.</div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Result -->
+                <div class="result-card">
+                    <div>
+                        <div class="result-label">Resultado Total</div>
+                        <div class="result-value" id="res-total">A · B = 15</div>
+                    </div>
+                    <div style="text-align: right;">
+                        <div class="result-label">Interpretación</div>
+                        <div class="interpretation-text" id="res-interpret">Dirección Similar</div>
+                    </div>
+                </div>
+
+                <!-- Algebraic Method -->
+                <div class="card method-card">
+                    <div class="method-badge" style="background: var(--emerald-100); color: var(--emerald-800);">Método
+                        Coordenadas</div>
+                    <h4 class="card-header" style="border-bottom: none; margin-bottom: 0.5rem;">
+                        <svg class="icon-sm text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M12 19l7-7 3 3-7 7-3-3z" />
+                            <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z" />
+                            <path d="M2 2l5 5" />
+                            <path d="M9.5 9.5l5 5" />
+                        </svg>
+                        Algebraica
+                    </h4>
+                    <div class="formula" id="formula-algebraic">
+                        <span>(</span><span class="text-blue bold">x₁</span><span>·</span><span
+                            class="text-red bold">x₂</span><span>) + (</span><span
+                            class="text-blue bold">y₁</span><span>·</span><span
+                            class="text-red bold">y₂</span><span>)</span>
+                        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="9 18 15 12 9 6" />
+                        </svg>
+                        <span id="formula-algebraic-step">(5·3) + (0·4)</span>
+                        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="9 18 15 12 9 6" />
+                        </svg>
+                        <span class="bold" id="formula-algebraic-res"
+                            style="background: var(--emerald-100); padding: 0 4px; border-radius: 2px;">15</span>
+                    </div>
+                </div>
+
+                <!-- Geometric Method -->
+                <div class="card method-card">
+                    <div class="method-badge" style="background: var(--purple-100); color: var(--purple-800);">Método
+                        Visual</div>
+                    <h4 class="card-header" style="border-bottom: none; margin-bottom: 0.25rem;">
+                        <svg class="icon-sm text-purple-600" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M21.3 15.3l-5-5L14.7 12l5 5-1.6 1.6-5-5-1.6 1.7 5 5-1.6 1.6-5-5-1.6 1.7 5 5" />
+                            <path d="M3 14.7l1.7-1.7M6.4 11.3l1.7-1.7M9.8 7.9l1.7-1.7M13.2 4.5l1.7-1.7" />
+                        </svg>
+                        Geométrica
+                    </h4>
+                    <p style="font-size: 11px; color: var(--slate-500); margin-bottom: 0.5rem;">Usa longitudes y el
+                        coseno del ángulo.</p>
+
+                    <div class="magnitude-calc">
+                        <div
+                            style="font-size: 10px; font-weight: 800; color: var(--purple-800); text-transform: uppercase;">
+                            Cálculo de Magnitudes:</div>
+                        <div class="calc-row">
+                            <span class="bold text-blue">|A|</span> = √(<span id="mag-a-x">5</span>² + <span
+                                id="mag-a-y">0</span>²) ≈ <span class="bold" id="mag-a-val"
+                                style="background: white; border: 1px solid var(--purple-200); padding: 0 4px; border-radius: 2px;">5.00</span>
+                        </div>
+                        <div class="calc-row">
+                            <span class="bold text-red">|B|</span> = √(<span id="mag-b-x">3</span>² + <span
+                                id="mag-b-y">4</span>²) ≈ <span class="bold" id="mag-b-val"
+                                style="background: white; border: 1px solid var(--purple-200); padding: 0 4px; border-radius: 2px;">5.00</span>
+                        </div>
+                    </div>
+
+                    <div class="geometric-summary">
+                        <div class="summary-col">
+                            <span class="summary-label">|A|</span>
+                            <span class="text-blue bold" id="geo-a">5.0</span>
+                        </div>
+                        <span style="color: var(--slate-300);">×</span>
+                        <div class="summary-col">
+                            <span class="summary-label">|B|</span>
+                            <span class="text-red bold" id="geo-b">5.0</span>
+                        </div>
+                        <span style="color: var(--slate-300);">×</span>
+                        <div class="summary-col">
+                            <span class="summary-label" id="geo-cos-label">cos(53°)</span>
+                            <span class="bold" id="geo-cos-val">0.60</span>
+                        </div>
+                        <span style="color: var(--slate-300);">=</span>
+                        <span class="bold text-purple" id="geo-res"
+                            style="background: var(--purple-100); padding: 2px 4px; border-radius:4px; font-size: 0.875rem;">15.0</span>
+                    </div>
+                </div>
+
+            </div>
+        </aside>
+    </div>
+
+    <!-- Main Logic -->
+    <script src="script.js"></script>
+</body>
+
+</html>
